@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 
 import { signIn, signUp } from "@/actions/auth";
 import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase";
 
 interface AuthFormProps {
   type: "login" | "register";
@@ -17,8 +18,26 @@ export default function AuthForm({ type }: AuthFormProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const supabase = createClient();
 
   const isLogin = type === "login";
+
+  const handleOAuth = async (provider: 'google' | 'github') => {
+    try {
+      setLoading(true);
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider,
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback`,
+        },
+      });
+      if (error) throw error;
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -148,11 +167,21 @@ export default function AuthForm({ type }: AuthFormProps) {
         </div>
 
         <div className="grid grid-cols-2 gap-4">
-          <button className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all text-sm font-medium">
+          <button 
+            type="button"
+            onClick={() => handleOAuth('google')}
+            disabled={loading}
+            className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all text-sm font-medium disabled:opacity-50"
+          >
             <Globe className="w-4 h-4" />
             Google
           </button>
-          <button className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all text-sm font-medium">
+          <button 
+            type="button"
+            onClick={() => handleOAuth('github')}
+            disabled={loading}
+            className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all text-sm font-medium disabled:opacity-50"
+          >
             <Code className="w-4 h-4" />
             GitHub
           </button>
