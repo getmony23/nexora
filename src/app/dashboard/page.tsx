@@ -21,7 +21,7 @@ export default function DashboardPage() {
       {/* Welcome */}
       <div>
         <h1 className="text-3xl font-bold font-outfit mb-2">Welcome back, CreativeStudio</h1>
-        <p className="text-white/40">Here's what's happening with your store today.</p>
+        <p className="text-white/40">Here&apos;s what&apos;s happening with your store today.</p>
       </div>
 
       {/* Stats Grid */}

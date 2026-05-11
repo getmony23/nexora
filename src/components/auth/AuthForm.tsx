@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Lock, User, ArrowRight, Code, Globe } from "lucide-react";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
 
 import { signIn, signUp } from "@/actions/auth";
 import { useRouter } from "next/navigation";
@@ -32,8 +31,9 @@ export default function AuthForm({ type }: AuthFormProps) {
         },
       });
       if (error) throw error;
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "An authentication error occurred";
+      setError(message);
     } finally {
       setLoading(false);
     }

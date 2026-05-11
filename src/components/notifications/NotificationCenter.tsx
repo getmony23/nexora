@@ -2,11 +2,9 @@
 
 import React from "react";
 import { 
-  Bell, 
   ShoppingBag, 
   Star, 
   CheckCircle2, 
-  AlertCircle,
   Clock,
   ChevronRight
 } from "lucide-react";

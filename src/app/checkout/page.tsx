@@ -118,7 +118,7 @@ export default function CheckoutPage() {
                         You will be redirected to PayPal to complete your purchase securely.
                       </div>
                       <div className="space-y-4">
-                        <p className="text-sm text-white/40">Items in your cart are protected by Nexora Guarantee. You can request a refund within 14 days if the product doesn't work as described.</p>
+                        <p className="text-sm text-white/40">Items in your cart are protected by Nexora Guarantee. You can request a refund within 14 days if the product doesn&apos;t work as described.</p>
                       </div>
                     </div>
                   ) : (
@@ -149,7 +149,7 @@ export default function CheckoutPage() {
 
               <div className="flex items-center gap-4 text-xs text-white/20 px-4">
                 <ShieldCheck className="w-5 h-5 text-brand-neon" />
-                <p>By clicking "Purchase", you agree to our Terms of Service and the specific license of this digital asset.</p>
+                <p>By clicking &quot;Purchase&quot;, you agree to our Terms of Service and the specific license of this digital asset.</p>
               </div>
             </div>
 

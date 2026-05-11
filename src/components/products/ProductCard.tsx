@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { Star, ShoppingCart, Eye, Heart } from "lucide-react";
 import { motion } from "framer-motion";

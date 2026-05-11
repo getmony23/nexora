@@ -1,0 +1,47 @@
+
+> nexora_tmp@0.1.0 lint
+> eslint
+
+
+E:\ai\Nexora\src\actions\auth.ts
+  11:11  warning  'data' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  36:11  warning  'data' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+E:\ai\Nexora\src\app\checkout\page.tsx
+   11:3    warning  'ChevronRight' is defined but never used                         @typescript-eslint/no-unused-vars
+  121:176  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  152:32   error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  152:41   error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+E:\ai\Nexora\src\app\checkout\success\page.tsx
+  9:3  warning  'Mail' is defined but never used  @typescript-eslint/no-unused-vars
+
+E:\ai\Nexora\src\app\dashboard\page.tsx
+  24:42  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  24:49  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+E:\ai\Nexora\src\app\dashboard\products\add\page.tsx
+   6:3   warning  'Plus' is defined but never used              @typescript-eslint/no-unused-vars
+   7:3   warning  'X' is defined but never used                 @typescript-eslint/no-unused-vars
+   8:12  warning  'ImageIcon' is defined but never used         @typescript-eslint/no-unused-vars
+  14:10  warning  'motion' is defined but never used            @typescript-eslint/no-unused-vars
+  14:18  warning  'AnimatePresence' is defined but never used   @typescript-eslint/no-unused-vars
+  17:16  warning  'setStep' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+E:\ai\Nexora\src\app\page.tsx
+  61:24  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+E:\ai\Nexora\src\app\product\[slug]\page.tsx
+  5:3  warning  'Eye' is defined but never used    @typescript-eslint/no-unused-vars
+  6:3  warning  'Heart' is defined but never used  @typescript-eslint/no-unused-vars
+
+E:\ai\Nexora\src\components\Navbar.tsx
+  5:32  warning  'User' is defined but never used  @typescript-eslint/no-unused-vars
+  5:53  warning  'Sun' is defined but never used   @typescript-eslint/no-unused-vars
+  5:58  warning  'Moon' is defined but never used  @typescript-eslint/no-unused-vars
+
+E:\ai\Nexora\src\components\auth\AuthForm.tsx
+  61:14  warning  'err' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 22 problems (6 errors, 16 warnings)
+

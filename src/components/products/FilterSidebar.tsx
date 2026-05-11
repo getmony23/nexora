@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Filter, ChevronDown, Check } from "lucide-react";
+import { Filter } from "lucide-react";
 
 export default function FilterSidebar() {
   const categories = [

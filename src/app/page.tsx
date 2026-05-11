@@ -58,7 +58,7 @@ export default function Home() {
               <span className="text-xl font-bold tracking-tight font-outfit">Nexora</span>
             </div>
             <p className="text-white/40 max-w-sm mb-6">
-              The world's leading marketplace for premium digital assets. Empowering creators to build the future of the web.
+              The world&apos;s leading marketplace for premium digital assets. Empowering creators to build the future of the web.
             </p>
           </div>
           <div>
