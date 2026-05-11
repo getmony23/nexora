@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Search, ShoppingCart, User, Bell, Menu, X, Sun, Moon } from "lucide-react";
+import { Search, ShoppingCart, Bell, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function Navbar() {

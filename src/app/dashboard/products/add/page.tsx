@@ -3,18 +3,15 @@
 import React, { useState } from "react";
 import { 
   Upload, 
-  Plus, 
-  X, 
-  Image as ImageIcon, 
   FileArchive, 
   Link as LinkIcon,
   HelpCircle,
   Save
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+// import { motion, AnimatePresence } from "framer-motion";
 
 export default function AddProductPage() {
-  const [step, setStep] = useState(1);
+  const [step] = useState(1);
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 pb-20">

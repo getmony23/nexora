@@ -6,7 +6,6 @@ import {
   CheckCircle2, 
   Download, 
   ArrowRight, 
-  Mail,
   Share2,
   FileText
 } from "lucide-react";

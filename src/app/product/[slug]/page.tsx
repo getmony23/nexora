@@ -2,8 +2,6 @@ import Navbar from "@/components/Navbar";
 import { 
   Star, 
   ShoppingCart, 
-  Eye, 
-  Heart, 
   Download, 
   ShieldCheck, 
   Zap, 

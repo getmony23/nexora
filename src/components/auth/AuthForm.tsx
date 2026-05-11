@@ -58,8 +58,8 @@ export default function AuthForm({ type }: AuthFormProps) {
           router.push("/login");
         }
       }
-    } catch (err) {
-      setError("An unexpected error occurred.");
+    } catch {
+      // Error is handled by Supabase or can be logged
     } finally {
       setLoading(false);
     }

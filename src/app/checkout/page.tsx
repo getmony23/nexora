@@ -8,7 +8,6 @@ import {
   Smartphone, 
   ArrowRight, 
   Lock,
-  ChevronRight,
   Info
 } from "lucide-react";
 import Link from "next/link";
