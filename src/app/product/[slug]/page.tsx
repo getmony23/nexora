@@ -15,7 +15,9 @@ import Link from "next/link";
 
 import ReviewSection from "@/components/products/ReviewSection";
 
-export default function ProductDetailsPage({ params }: { params: { slug: string } }) {
+export default async function ProductDetailsPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  console.log("Loading product:", slug);
   // In a real app, fetch data from Supabase using the slug
   const product = {
     title: "Nexora SaaS Dashboard Kit",

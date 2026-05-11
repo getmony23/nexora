@@ -12,11 +12,12 @@ import {
   CheckCircle2
 } from "lucide-react";
 
-export default function SellerProfilePage({ params }: { params: { username: string } }) {
+export default async function SellerProfilePage({ params }: { params: Promise<{ username: string }> }) {
+  const { username } = await params;
   // Mock data for the seller
   const seller = {
     name: "CreativeStudio",
-    username: params.username,
+    username: username,
     bio: "We are a team of digital artists and developers passionate about creating high-quality SaaS templates and UI kits. With over 5 years of experience, we help developers launch faster.",
     joined_date: "January 2024",
     avatar_url: "",
