@@ -122,7 +122,7 @@ export default function AuthForm({ type }: AuthFormProps) {
 
           {isLogin && (
             <div className="flex justify-end">
-              <Link href="/forgot-password" size="sm" className="text-xs text-brand-indigo hover:underline">
+              <Link href="/forgot-password" className="text-xs text-brand-indigo hover:underline">
                 Forgot password?
               </Link>
             </div>
