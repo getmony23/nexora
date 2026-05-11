@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 
 import { signIn, signUp } from "@/actions/auth";
 import { useRouter } from "next/navigation";
-import { createClient } from "@/lib/supabase";
+import { createSupabaseClient } from "@/lib/supabase";
 
 interface AuthFormProps {
   type: "login" | "register";
@@ -18,7 +18,7 @@ export default function AuthForm({ type }: AuthFormProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  const supabase = createClient();
+  const supabase = createSupabaseClient();
 
   const isLogin = type === "login";
 
