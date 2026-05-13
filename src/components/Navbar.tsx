@@ -18,11 +18,15 @@ export default function Navbar() {
 
   useEffect(() => {
     const getUser = async () => {
-      const { data: { session }, error } = await supabase.auth.getSession();
+      // Use getUser() for more reliable check than getSession()
+      const { data: { user }, error } = await supabase.auth.getUser();
       if (error) {
-        console.error("Error getting session:", error);
+        // Fallback to session check if getUser fails or if it's a new login
+        const { data: { session } } = await supabase.auth.getSession();
+        setUser(session?.user || null);
+      } else {
+        setUser(user);
       }
-      setUser(session?.user || null);
     };
     getUser();
 

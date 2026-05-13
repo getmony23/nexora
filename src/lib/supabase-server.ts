@@ -17,8 +17,9 @@ export async function createSupabaseServerClient() {
             cookiesToSet.forEach(({ name, value, options }) =>
               cookieStore.set(name, value, options)
             )
-          } catch {
+          } catch (error) {
             // The `setAll` method was called from a Server Component.
+            // This is expected in Next.js when rendering server components.
           }
         },
       },
