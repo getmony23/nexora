@@ -8,16 +8,20 @@ import { createSupabaseClient } from "@/lib/supabase";
 import { type User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
 
+const supabase = createSupabaseClient();
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [showDropdown, setShowDropdown] = useState(false);
   const router = useRouter();
-  const supabase = createSupabaseClient();
 
   useEffect(() => {
     const getUser = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
+      const { data: { session }, error } = await supabase.auth.getSession();
+      if (error) {
+        console.error("Error getting session:", error);
+      }
       setUser(session?.user || null);
     };
     getUser();
@@ -29,7 +33,7 @@ export default function Navbar() {
     return () => {
       subscription.unsubscribe();
     };
-  }, [supabase.auth]);
+  }, []);
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();

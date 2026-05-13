@@ -8,7 +8,13 @@ import {
   ArrowDownRight
 } from "lucide-react";
 
-export default function DashboardPage() {
+import { createSupabaseServerClient } from "@/lib/supabase-server";
+
+export default async function DashboardPage() {
+  const supabase = await createSupabaseServerClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  const userName = user?.user_metadata?.full_name || user?.email?.split('@')[0] || "User";
+
   const stats = [
     { label: "Total Revenue", value: "$12,450.00", icon: CreditCard, trend: "+12.5%", isPositive: true },
     { label: "Total Orders", value: "458", icon: Package, trend: "+5.2%", isPositive: true },
@@ -20,7 +26,7 @@ export default function DashboardPage() {
     <div className="space-y-8">
       {/* Welcome */}
       <div>
-        <h1 className="text-3xl font-bold font-outfit mb-2">Welcome back, CreativeStudio</h1>
+        <h1 className="text-3xl font-bold font-outfit mb-2">Welcome back, {userName}</h1>
         <p className="text-white/40">Here&apos;s what&apos;s happening with your store today.</p>
       </div>
 

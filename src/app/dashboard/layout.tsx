@@ -11,11 +11,18 @@ import {
   UserCircle
 } from "lucide-react";
 
-export default function DashboardLayout({
+import { createSupabaseServerClient } from "@/lib/supabase-server";
+import { signOut } from "@/actions/auth";
+
+export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const supabase = await createSupabaseServerClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  
+  const userName = user?.user_metadata?.full_name || user?.email?.split('@')[0] || "User";
   const menuItems = [
     { icon: LayoutDashboard, label: "Overview", href: "/dashboard" },
     { icon: PackagePlus, label: "Add Product", href: "/dashboard/products/add" },
@@ -51,10 +58,12 @@ export default function DashboardLayout({
         </nav>
 
         <div className="p-4 mt-auto border-t border-white/5">
-          <button className="flex items-center gap-3 w-full px-4 py-3 rounded-xl text-red-400 hover:bg-red-400/10 transition-all">
-            <LogOut className="w-5 h-5" />
-            <span className="text-sm font-medium">Logout</span>
-          </button>
+          <form action={signOut}>
+            <button type="submit" className="flex items-center gap-3 w-full px-4 py-3 rounded-xl text-red-400 hover:bg-red-400/10 transition-all">
+              <LogOut className="w-5 h-5" />
+              <span className="text-sm font-medium">Logout</span>
+            </button>
+          </form>
         </div>
       </aside>
 
@@ -71,8 +80,8 @@ export default function DashboardLayout({
             </button>
             <div className="flex items-center gap-3">
               <div className="text-right hidden sm:block">
-                <p className="text-sm font-bold">CreativeStudio</p>
-                <p className="text-[10px] text-white/40">Premium Seller</p>
+                <p className="text-sm font-bold">{userName}</p>
+                <p className="text-[10px] text-white/40">{user?.email}</p>
               </div>
               <UserCircle className="w-8 h-8 text-white/20" />
             </div>
