@@ -17,6 +17,23 @@ export async function GET(request: Request) {
     console.error('Auth error:', error);
   }
 
-  // return the user to login with error
-  return NextResponse.redirect(`${origin}/login?error=auth-code-error`);
+  // If no code, check if it's an implicit flow (hash fragment)
+  return new NextResponse(`
+    <html>
+      <head>
+        <title>Authenticating...</title>
+      </head>
+      <body style="background: #030712; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;">
+        <script>
+          if (window.location.hash && window.location.hash.includes('access_token')) {
+            window.location.href = '/auth/implicit-callback' + window.location.hash;
+          } else {
+            window.location.href = '/login?error=auth-code-error';
+          }
+        </script>
+      </body>
+    </html>
+  `, { 
+    headers: { 'Content-Type': 'text/html' } 
+  });
 }
