@@ -66,43 +66,49 @@ export default async function DashboardLayout({
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="px-4 py-2 rounded-xl text-sm font-medium text-white/60 hover:text-white hover:bg-white/5 transition-all"
+                  className={`px-4 py-2 rounded-xl text-sm font-bold transition-all relative group ${
+                    item.label === "Dashboard" ? "text-white" : "text-white/40 hover:text-white"
+                  }`}
                 >
                   {item.label}
+                  {item.label === "Dashboard" && (
+                    <div className="absolute bottom-[-10px] left-1/2 -translate-x-1/2 w-8 h-1 bg-brand-purple rounded-full shadow-[0_0_10px_rgba(168,85,247,0.8)]"></div>
+                  )}
                 </Link>
               ))}
             </nav>
           </div>
 
           <div className="flex items-center gap-6">
-            <div className="hidden lg:flex items-center glass bg-white/5 rounded-xl px-3 py-1.5 border-white/5">
-              <Search className="w-4 h-4 text-white/40 mr-2" />
+            <div className="hidden lg:flex items-center glass bg-white/5 rounded-xl px-4 py-2 border-white/10 group focus-within:border-brand-indigo/50 transition-all">
+              <Search className="w-4 h-4 text-white/20 mr-3 group-focus-within:text-brand-indigo transition-colors" />
               <input 
                 type="text" 
                 placeholder="Search..." 
-                className="bg-transparent border-none outline-none text-xs w-40 placeholder:text-white/20"
+                className="bg-transparent border-none outline-none text-xs w-48 placeholder:text-white/20 text-white font-medium"
               />
             </div>
             
-            <button className="relative p-2 text-white/40 hover:text-white transition-colors">
+            <button className="relative p-2.5 rounded-xl glass bg-white/5 border-white/10 text-white/40 hover:text-white transition-all hover:scale-110">
               <Bell className="w-5 h-5" />
-              <span className="absolute top-2 right-2 w-1.5 h-1.5 bg-brand-neon rounded-full"></span>
+              <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-brand-neon rounded-full border-2 border-[#02040a]"></span>
             </button>
 
-            <div className="flex items-center gap-3 pl-6 border-l border-white/10">
+            <div className="flex items-center gap-4 pl-6 border-l border-white/10">
               <div className="text-right hidden sm:block">
-                <p className="text-xs font-bold">{userName}</p>
-                <p className="text-[10px] text-white/40">Pro Account</p>
+                <p className="text-sm font-black text-white">{userName}</p>
+                <p className="text-[10px] text-white/30 font-bold uppercase tracking-widest">Pro Account</p>
               </div>
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-brand-indigo to-brand-purple p-[1px]">
-                <div className="w-full h-full rounded-full bg-[#020617] flex items-center justify-center overflow-hidden">
-                  <UserIcon className="w-5 h-5 text-white/60" />
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-indigo via-brand-purple to-brand-neon p-[1.5px] shadow-[0_0_15px_rgba(99,102,241,0.2)]">
+                <div className="w-full h-full rounded-[0.9rem] bg-[#02040a] flex items-center justify-center overflow-hidden">
+                  <UserIcon className="w-6 h-6 text-white/60" />
                 </div>
               </div>
+              <MoreHorizontal className="w-4 h-4 text-white/20 cursor-pointer hover:text-white transition-colors" />
             </div>
 
             <form action={signOut}>
-              <button type="submit" className="p-2 text-red-400/60 hover:text-red-400 transition-colors">
+              <button type="submit" className="p-2.5 rounded-xl glass bg-white/5 border-white/10 text-red-400/40 hover:text-red-400 transition-all hover:scale-110">
                 <LogOut className="w-5 h-5" />
               </button>
             </form>
