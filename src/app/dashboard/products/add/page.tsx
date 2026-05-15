@@ -245,7 +245,7 @@ export default function AddProductPage() {
             </h3>
             
             <div className="space-y-2">
-              <label className="text-[10px] font-black text-white/30 uppercase tracking-[0.3em] ml-1">Live Demo URL (Optional)</label>
+              <label className="text-[10px] font-black text-white/30 uppercase tracking-[0.3em] ml-1">رابط المعاينة الحية (اختياري)</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
                   <LinkIcon className="h-5 w-5 text-white/20" />
