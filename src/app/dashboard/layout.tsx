@@ -36,16 +36,17 @@ export default async function DashboardLayout({
   ];
 
   return (
-    <div className="min-h-screen bg-[#020617] text-white relative overflow-hidden">
+    <div className="min-h-screen bg-[#02040a] text-white relative overflow-hidden bg-grid">
       {/* Futuristic Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none -z-10">
-        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full bg-brand-indigo/10 blur-[150px] animate-pulse-slow"></div>
-        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-brand-purple/10 blur-[150px] animate-pulse-slow"></div>
-        <div className="absolute top-[20%] right-[10%] w-[30%] h-[30%] rounded-full bg-brand-neon/5 blur-[100px]"></div>
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-brand-indigo/20 blur-[120px] animate-pulse-neon"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-brand-purple/20 blur-[120px] animate-pulse-neon"></div>
+        <div className="absolute top-[20%] right-[10%] w-[30%] h-[30%] rounded-full bg-brand-neon/10 blur-[100px] animate-pulse-neon"></div>
+        <div className="absolute middle-0 left-1/2 -translate-x-1/2 w-[40%] h-[40%] rounded-full bg-brand-indigo/5 blur-[150px]"></div>
         
         {/* Floating geometric shape */}
-        <div className="absolute top-20 right-[-5%] w-[400px] h-[400px] animate-float opacity-30">
-          <img src="/geometric-shape.png" alt="" className="w-full h-full object-contain" />
+        <div className="absolute top-20 right-[-5%] w-[500px] h-[500px] animate-float opacity-40">
+          <img src="/geometric-shape.png" alt="" className="w-full h-full object-contain neon-glow-cyan" />
         </div>
       </div>
 

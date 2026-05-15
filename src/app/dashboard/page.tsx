@@ -42,97 +42,106 @@ export default async function DashboardPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Performance Overview Chart Mockup */}
-        <div className="lg:col-span-2 glass-card rounded-[2.5rem] p-8 relative overflow-hidden group">
-          <div className="flex items-center justify-between mb-8">
+        <div className="lg:col-span-2 glass-card rounded-[2.5rem] p-8 relative overflow-hidden group neon-border-indigo">
+          <div className="flex items-center justify-between mb-12">
             <div>
-              <h3 className="text-lg font-bold font-outfit">Performance Overview</h3>
+              <h3 className="text-xl font-bold font-outfit text-white">Performance Overview</h3>
               <p className="text-xs text-white/20">SF Pro Display / Sep 2024</p>
             </div>
             <div className="flex items-center gap-3">
-              <div className="px-3 py-1.5 rounded-lg glass bg-white/5 border-white/5 text-[10px] font-bold text-white/40 flex items-center gap-2">
+              <div className="px-4 py-2 rounded-xl glass bg-white/5 border-white/10 text-[10px] font-bold text-white/40 flex items-center gap-2">
                 Sep 2024
-                <TrendingUp className="w-3 h-3 text-brand-indigo" />
+                <TrendingUp className="w-3 h-3 text-brand-neon" />
               </div>
-              <button className="p-2 text-white/20 hover:text-white"><MoreHorizontal className="w-4 h-4" /></button>
+              <button className="p-2 text-white/20 hover:text-white transition-colors"><MoreHorizontal className="w-5 h-5" /></button>
             </div>
           </div>
 
           {/* Chart UI Mockup */}
-          <div className="h-[250px] w-full relative">
+          <div className="h-[280px] w-full relative">
+            {/* Grid lines */}
+            <div className="absolute inset-0 flex flex-col justify-between opacity-5">
+              {[1, 2, 3, 4, 5].map((line) => (
+                <div key={line} className="w-full h-[1px] bg-white"></div>
+              ))}
+            </div>
+            
             <div className="absolute inset-0 flex items-end justify-between px-4 pb-8">
-              {[40, 60, 45, 80, 55, 90, 70].map((height, i) => (
-                <div key={i} className="flex flex-col items-center gap-3 group/bar">
-                  <div className="w-1.5 rounded-full bg-white/5 relative overflow-hidden h-[180px]">
+              {[45, 65, 50, 90, 60, 95, 75].map((height, i) => (
+                <div key={i} className="flex flex-col items-center gap-4 group/bar">
+                  <div className="w-2.5 rounded-full bg-white/5 relative overflow-hidden h-[200px]">
                     <div 
-                      className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-brand-indigo to-brand-purple rounded-full transition-all duration-1000 delay-300"
+                      className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-brand-indigo via-brand-purple to-brand-neon rounded-full transition-all duration-1000 delay-300 neon-glow-cyan"
                       style={{ height: `${height}%` }}
                     >
-                      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3 h-3 bg-white rounded-full shadow-[0_0_15px_rgba(255,255,255,0.8)] opacity-0 group-hover/bar:opacity-100 transition-opacity"></div>
+                      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-4 h-4 bg-white rounded-full shadow-[0_0_20px_rgba(34,211,238,1)] opacity-100 scale-110"></div>
                     </div>
                   </div>
-                  <span className="text-[10px] text-white/20 font-bold">Sep {3 + i*4}</span>
+                  <span className="text-[10px] text-white/30 font-bold tracking-tighter">Sep {3 + i*4}</span>
                 </div>
               ))}
             </div>
             
             {/* Growth Badge */}
-            <div className="absolute top-10 left-1/2 -translate-x-1/2 px-4 py-2 rounded-2xl bg-brand-indigo/10 border border-brand-indigo/20 backdrop-blur-xl flex items-center gap-2">
-              <span className="text-brand-indigo font-bold text-sm">+28.5%</span>
-              <span className="text-[10px] text-white/40 uppercase tracking-widest font-bold">Growth</span>
+            <div className="absolute top-6 left-1/2 -translate-x-1/2 px-5 py-2.5 rounded-2xl bg-brand-indigo/20 border border-brand-indigo/40 backdrop-blur-2xl flex items-center gap-3 shadow-[0_0_30px_rgba(99,102,241,0.3)]">
+              <span className="text-brand-neon font-black text-base">+28.5%</span>
+              <span className="text-[10px] text-white/60 uppercase tracking-[0.2em] font-black">Growth</span>
             </div>
           </div>
         </div>
 
         {/* Task Distribution (Circular Progress) Mockup */}
-        <div className="lg:col-span-1 glass-card rounded-[2.5rem] p-8 flex flex-col items-center justify-center text-center">
-          <div className="w-full flex justify-between mb-8">
-            <h3 className="text-lg font-bold font-outfit text-left">Task Distribution</h3>
-            <button className="text-white/20 hover:text-white"><MoreHorizontal className="w-4 h-4" /></button>
+        <div className="lg:col-span-1 glass-card rounded-[2.5rem] p-8 flex flex-col items-center justify-center text-center neon-border-purple">
+          <div className="w-full flex justify-between mb-10">
+            <h3 className="text-xl font-bold font-outfit text-left text-white">Task Distribution</h3>
+            <button className="text-white/20 hover:text-white transition-colors"><MoreHorizontal className="w-5 h-5" /></button>
           </div>
           
-          <div className="relative w-48 h-48 mb-8">
+          <div className="relative w-56 h-56 mb-10">
             <svg className="w-full h-full transform -rotate-90">
               <circle
-                cx="96" cy="96" r="80"
+                cx="112" cy="112" r="95"
                 stroke="currentColor"
-                strokeWidth="12"
+                strokeWidth="14"
                 fill="transparent"
                 className="text-white/5"
               />
               <circle
-                cx="96" cy="96" r="80"
+                cx="112" cy="112" r="95"
                 stroke="url(#neonGradient)"
-                strokeWidth="12"
-                strokeDasharray={2 * Math.PI * 80}
-                strokeDashoffset={2 * Math.PI * 80 * 0.25}
+                strokeWidth="14"
+                strokeDasharray={2 * Math.PI * 95}
+                strokeDashoffset={2 * Math.PI * 95 * 0.25}
                 strokeLinecap="round"
                 fill="transparent"
+                className="neon-glow-cyan"
               />
               <defs>
                 <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#6366f1" />
+                  <stop offset="0%" stopColor="#818cf8" />
+                  <stop offset="50%" stopColor="#c084fc" />
                   <stop offset="100%" stopColor="#22d3ee" />
                 </linearGradient>
               </defs>
             </svg>
             <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <span className="text-4xl font-bold font-outfit">75%</span>
-              <span className="text-[10px] text-white/40 uppercase tracking-widest font-bold">Complete</span>
+              <span className="text-5xl font-black font-outfit text-white">75%</span>
+              <span className="text-[10px] text-white/40 uppercase tracking-[0.3em] font-black mt-2">Complete</span>
             </div>
           </div>
 
-          <div className="w-full grid grid-cols-3 gap-2">
+          <div className="w-full grid grid-cols-3 gap-4">
             {[
-              { label: "75%", desc: "Complete", color: "bg-brand-indigo" },
+              { label: "75%", desc: "Complete", color: "bg-brand-neon" },
               { label: "15%", desc: "Pending", color: "bg-brand-purple" },
               { label: "10%", desc: "Due", color: "bg-red-400" },
             ].map((item) => (
               <div key={item.desc} className="text-center">
-                <div className="flex items-center justify-center gap-1.5 mb-1">
-                  <div className={`w-1.5 h-1.5 rounded-full ${item.color}`}></div>
-                  <span className="text-xs font-bold">{item.label}</span>
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  <div className={`w-2 h-2 rounded-full ${item.color} shadow-[0_0_8px_currentColor]`}></div>
+                  <span className="text-sm font-black text-white">{item.label}</span>
                 </div>
-                <p className="text-[10px] text-white/20 font-medium">{item.desc}</p>
+                <p className="text-[10px] text-white/30 font-bold uppercase tracking-widest">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -146,39 +155,39 @@ export default async function DashboardPage() {
           <button className="text-white/20 hover:text-white"><MoreHorizontal className="w-5 h-5" /></button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {[
-            { title: "AI Implementation", progress: 84, icon: Cpu, color: "from-brand-indigo to-brand-purple" },
+            { title: "AI Implementation", progress: 84, icon: Cpu, color: "from-brand-indigo via-brand-purple to-brand-neon" },
             { title: "Product Launch", progress: 62, icon: Rocket, color: "from-brand-purple to-brand-neon" },
             { title: "Quantum System", progress: 75, icon: Play, color: "from-brand-indigo to-brand-neon" },
           ].map((item) => (
-            <div key={item.title} className="glass-card rounded-3xl p-6 hover:border-white/20 transition-all group">
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <item.icon className="w-5 h-5 text-white/60" />
+            <div key={item.title} className="glass-card rounded-[2rem] p-8 hover:border-white/20 transition-all group neon-border-indigo glass-hover">
+              <div className="flex items-center justify-between mb-8">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center group-hover:scale-110 transition-transform neon-glow-purple">
+                    <item.icon className="w-6 h-6 text-white/80" />
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold">{item.title}</h4>
-                    <p className="text-[10px] text-white/20 font-medium">Progress cards</p>
+                    <h4 className="text-base font-black text-white">{item.title}</h4>
+                    <p className="text-[10px] text-white/30 font-bold uppercase tracking-widest">Progress cards</p>
                   </div>
                 </div>
-                <span className="text-lg font-bold font-outfit">{item.progress}%</span>
+                <span className="text-2xl font-black font-outfit text-white">{item.progress}%</span>
               </div>
 
-              <div className="w-full h-1.5 bg-white/5 rounded-full mb-6 overflow-hidden">
+              <div className="w-full h-2 bg-white/5 rounded-full mb-8 overflow-hidden">
                 <div 
-                  className={`h-full bg-gradient-to-r ${item.color} rounded-full`}
+                  className={`h-full bg-gradient-to-r ${item.color} rounded-full neon-glow-cyan`}
                   style={{ width: `${item.progress}%` }}
                 ></div>
               </div>
 
               <div className="flex items-center justify-between">
-                <button className="px-4 py-2 rounded-xl bg-brand-indigo/10 text-brand-indigo text-[10px] font-bold uppercase tracking-widest hover:bg-brand-indigo hover:text-white transition-all">
+                <button className="px-5 py-2.5 rounded-xl bg-brand-indigo/20 text-brand-neon text-[10px] font-black uppercase tracking-[0.2em] hover:bg-brand-indigo hover:text-white transition-all border border-brand-indigo/30">
                   View details
                 </button>
-                <button className="p-2 rounded-lg glass bg-white/5 text-white/20 group-hover:text-white transition-colors">
-                  <ArrowUpRight className="w-4 h-4" />
+                <button className="p-3 rounded-xl glass bg-white/5 text-white/40 group-hover:text-white group-hover:scale-110 transition-all">
+                  <ArrowUpRight className="w-5 h-5" />
                 </button>
               </div>
             </div>
