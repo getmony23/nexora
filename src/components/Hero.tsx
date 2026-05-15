@@ -54,7 +54,10 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <button className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-brand-indigo to-brand-purple text-white font-bold text-lg shadow-2xl shadow-brand-indigo/30 hover:shadow-brand-indigo/50 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2">
+            <button 
+              onClick={() => document.getElementById('featured-assets')?.scrollIntoView({ behavior: 'smooth' })}
+              className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-brand-indigo to-brand-purple text-white font-bold text-lg shadow-2xl shadow-brand-indigo/30 hover:shadow-brand-indigo/50 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2"
+            >
               Start Exploring
               <ArrowRight className="w-5 h-5" />
             </button>

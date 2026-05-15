@@ -17,6 +17,8 @@ export const metadata: Metadata = {
   description: "Premium SaaS Marketplace for websites, landing pages, templates, and digital tools.",
 };
 
+import { AuthProvider } from "@/components/auth/AuthProvider";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -25,7 +27,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark h-full antialiased">
       <body className={`${inter.variable} ${outfit.variable} font-sans min-h-full flex flex-col`}>
-        {children}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

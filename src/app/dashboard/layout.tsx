@@ -22,7 +22,10 @@ export default async function DashboardLayout({
   const supabase = await createSupabaseServerClient();
   const { data: { user } } = await supabase.auth.getUser();
   
-  const userName = user?.user_metadata?.full_name || user?.email?.split('@')[0] || "User";
+  const userName = user?.user_metadata?.full_name || 
+                   user?.user_metadata?.name || 
+                   user?.email?.split('@')[0] || 
+                   "User";
   const menuItems = [
     { icon: LayoutDashboard, label: "Overview", href: "/dashboard" },
     { icon: PackagePlus, label: "Add Product", href: "/dashboard/products/add" },

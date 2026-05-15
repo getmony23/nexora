@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import { ArrowRight } from "lucide-react";
 
 export default function Home() {
   return (
@@ -8,37 +9,94 @@ export default function Home() {
       <main className="flex-grow">
         <Hero />
         
-        {/* Placeholder for Featured Products Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-12">
+        {/* Featured Products Section */}
+        <section id="featured-assets" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div>
-              <h2 className="text-3xl font-bold font-outfit mb-2">Featured Assets</h2>
-              <p className="text-white/40">Handpicked premium products from our top sellers.</p>
+              <div className="flex items-center gap-2 text-brand-indigo font-bold text-sm uppercase tracking-widest mb-3">
+                <span className="w-8 h-[2px] bg-brand-indigo"></span>
+                Curated Collection
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold font-outfit text-white">
+                Premium <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-indigo to-brand-purple">Digital Assets</span>
+              </h2>
             </div>
-            <button className="text-brand-indigo font-medium hover:underline">View all</button>
+            <button className="px-6 py-3 rounded-xl glass border-white/10 text-white font-medium hover:bg-white/5 transition-all flex items-center gap-2 group">
+              Browse All Assets
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </button>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="glass rounded-3xl overflow-hidden group glass-hover">
-                <div className="aspect-video bg-white/5 relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-brand-indigo/10 to-brand-purple/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="px-3 py-1 rounded-full bg-white/5 text-xs font-medium text-white/60">Next.js Template</span>
-                    <span className="text-brand-neon font-bold">$49</span>
-                  </div>
-                  <h3 className="text-xl font-bold mb-2 font-outfit">Nexora Dashboard Kit</h3>
-                  <p className="text-sm text-white/40 mb-6">A professional dashboard template with Supabase integration.</p>
-                  <div className="flex items-center justify-between border-t border-white/5 pt-4">
-                    <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-full bg-brand-purple/20"></div>
-                      <span className="text-xs text-white/60">CreativeStudio</span>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {[
+              {
+                title: "Nexora Dashboard Kit",
+                category: "Next.js Template",
+                price: "49",
+                image: "/template.png",
+                author: "CreativeStudio",
+                rating: "4.9",
+                desc: "A professional, high-performance dashboard template with full Supabase integration and dark mode."
+              },
+              {
+                title: "Lumina Agency Landing",
+                category: "React / Tailwind",
+                price: "29",
+                image: "/landing.png",
+                author: "PixelPerfect",
+                rating: "4.8",
+                desc: "Convert more visitors with this stunning agency landing page featuring smooth scroll and animations."
+              },
+              {
+                title: "Quantum UI System",
+                category: "Figma Asset",
+                price: "35",
+                image: "/ui-kit.png",
+                author: "DesignFlow",
+                rating: "5.0",
+                desc: "A comprehensive UI kit for modern web applications with 500+ components and 50+ page layouts."
+              }
+            ].map((product, i) => (
+              <div key={i} className="group relative">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-indigo to-brand-purple rounded-[2rem] opacity-0 group-hover:opacity-20 blur transition duration-500"></div>
+                <div className="relative glass rounded-3xl overflow-hidden border-white/5 flex flex-col h-full hover:border-white/20 transition-colors duration-300">
+                  <div className="aspect-[16/10] overflow-hidden relative">
+                    <img 
+                      src={product.image} 
+                      alt={product.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute top-4 right-4 px-3 py-1.5 rounded-xl glass border-white/10 backdrop-blur-md text-white font-bold">
+                      ${product.price}
                     </div>
-                    <div className="flex items-center gap-1">
-                      <span className="text-yellow-500">★</span>
-                      <span className="text-xs font-medium">4.9</span>
+                  </div>
+                  
+                  <div className="p-8 flex flex-col flex-grow">
+                    <div className="flex items-center gap-2 mb-4">
+                      <span className="px-3 py-1 rounded-full bg-brand-indigo/10 text-[10px] font-bold uppercase tracking-wider text-brand-indigo border border-brand-indigo/20">
+                        {product.category}
+                      </span>
+                    </div>
+                    
+                    <h3 className="text-2xl font-bold mb-3 font-outfit text-white group-hover:text-brand-indigo transition-colors">
+                      {product.title}
+                    </h3>
+                    
+                    <p className="text-sm text-white/40 mb-8 line-clamp-2 leading-relaxed">
+                      {product.desc}
+                    </p>
+                    
+                    <div className="mt-auto flex items-center justify-between pt-6 border-t border-white/5">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center text-[10px] font-bold">
+                          {product.author[0]}
+                        </div>
+                        <span className="text-xs font-medium text-white/60">{product.author}</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 bg-white/5 px-2.5 py-1 rounded-lg">
+                        <span className="text-yellow-500 text-xs">★</span>
+                        <span className="text-xs font-bold text-white">{product.rating}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
