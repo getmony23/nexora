@@ -1,4 +1,3 @@
-import React from "react";
 import { 
   TrendingUp, 
   ArrowUpRight,
@@ -12,6 +11,7 @@ import {
 } from "lucide-react";
 
 import { createSupabaseServerClient } from "@/lib/supabase-server";
+import Particles from "@/components/dashboard/Particles";
 
 export default async function DashboardPage() {
   const supabase = await createSupabaseServerClient();
@@ -41,16 +41,10 @@ export default async function DashboardPage() {
           </div>
         </div>
 
-        {/* Animated 3D Shape Container */}
-        <div className="absolute top-[-100px] right-[-50px] md:relative md:top-0 md:right-0 w-full md:w-[450px] h-[300px] pointer-events-none">
-          <div className="relative w-full h-full animate-float">
-            <img 
-              src="/animated-3d.png" 
-              alt="" 
-              className="w-full h-full object-contain neon-glow-cyan drop-shadow-[0_0_30px_rgba(34,211,238,0.3)]" 
-            />
-            {/* Extra glowing orbs around the shape */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-brand-neon/20 blur-[60px] animate-pulse-neon"></div>
+        {/* Animated Particles Container */}
+        <div className="absolute top-[-100px] right-[-50px] md:relative md:top-0 md:right-0 w-full md:w-[450px] h-[300px] pointer-events-none overflow-visible">
+          <div className="w-full h-full opacity-80">
+            <Particles />
           </div>
         </div>
       </div>
