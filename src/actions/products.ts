@@ -44,11 +44,17 @@ export async function createProduct(formData: FormData) {
     }
 
     // 3. Insert Product into Database
+    const slug = title
+      .toLowerCase()
+      .replace(/[^\w ]+/g, "")
+      .replace(/ +/g, "-") + "-" + Math.random().toString(36).substring(2, 7);
+
     const { error: dbError } = await supabase
       .from("products")
       .insert({
         user_id: user.id,
         title,
+        slug,
         description,
         price,
         category,
