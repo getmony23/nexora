@@ -12,11 +12,18 @@ import {
 
 import { createSupabaseServerClient } from "@/lib/supabase-server";
 import Particles from "@/components/dashboard/Particles";
+import Link from "next/link";
 
 export default async function DashboardPage() {
   const supabase = await createSupabaseServerClient();
   const { data: { user } } = await supabase.auth.getUser();
   const userName = user?.user_metadata?.full_name || user?.email?.split('@')[0] || "User";
+
+  const { data: products } = await supabase
+    .from("products")
+    .select("*")
+    .eq("user_id", user?.id)
+    .order("created_at", { ascending: false });
 
   return (
     <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-1000">
@@ -169,47 +176,54 @@ export default async function DashboardPage() {
       {/* Project Progress Section */}
       <div className="space-y-8">
         <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-black font-outfit tracking-tight">Project Progress</h2>
-          <button className="text-white/20 hover:text-white"><MoreHorizontal className="w-6 h-6" /></button>
+          <h2 className="text-2xl font-black font-outfit tracking-tight">Your Projects</h2>
+          <Link href="/dashboard/products/add" className="text-brand-neon hover:underline text-sm font-bold">Add New</Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          {[
-            { title: "AI Implementation", progress: 84, icon: Cpu, color: "from-brand-indigo via-brand-purple to-brand-neon" },
-            { title: "Product Launch", progress: 62, icon: Rocket, color: "from-brand-purple to-brand-neon" },
-            { title: "Quantum System", progress: 75, icon: Play, color: "from-brand-indigo to-brand-neon" },
-          ].map((item) => (
-            <div key={item.title} className="glass-card rounded-[2.5rem] p-10 hover:border-white/20 transition-all group neon-border-indigo glass-hover">
+          {products && products.length > 0 ? products.map((item: any) => (
+            <div key={item.id} className="glass-card rounded-[2.5rem] p-10 hover:border-white/20 transition-all group neon-border-indigo glass-hover">
               <div className="flex items-center justify-between mb-10">
                 <div className="flex items-center gap-5">
-                  <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center group-hover:scale-110 transition-transform neon-glow-purple border border-white/5">
-                    <item.icon className="w-7 h-7 text-white/80" />
+                  <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center group-hover:scale-110 transition-transform neon-glow-purple border border-white/5 overflow-hidden">
+                    {item.thumbnail_url ? (
+                      <img src={item.thumbnail_url} alt="" className="w-full h-full object-cover" />
+                    ) : (
+                      <Cpu className="w-7 h-7 text-white/80" />
+                    )}
                   </div>
                   <div>
-                    <h4 className="text-lg font-black text-white">{item.title}</h4>
-                    <p className="text-[10px] text-white/30 font-black uppercase tracking-widest mt-1">Progress cards</p>
+                    <h4 className="text-lg font-black text-white line-clamp-1">{item.title}</h4>
+                    <p className="text-[10px] text-white/30 font-black uppercase tracking-widest mt-1">{item.category}</p>
                   </div>
                 </div>
-                <span className="text-3xl font-black font-outfit text-white">{item.progress}%</span>
+                <span className="text-3xl font-black font-outfit text-white">${item.price}</span>
               </div>
 
               <div className="w-full h-2.5 bg-white/5 rounded-full mb-10 overflow-hidden">
                 <div 
-                  className={`h-full bg-gradient-to-r ${item.color} rounded-full neon-glow-cyan`}
-                  style={{ width: `${item.progress}%` }}
+                  className="h-full bg-gradient-to-r from-brand-indigo to-brand-neon rounded-full neon-glow-cyan"
+                  style={{ width: `100%` }}
                 ></div>
               </div>
 
               <div className="flex items-center justify-between">
                 <button className="px-6 py-3 rounded-xl bg-brand-indigo/30 text-brand-neon text-[11px] font-black uppercase tracking-[0.3em] hover:bg-brand-indigo hover:text-white transition-all border border-brand-indigo/40">
-                  Add project progress
+                  Manage Product
                 </button>
-                <button className="p-3.5 rounded-xl glass bg-white/5 text-white/40 group-hover:text-white group-hover:scale-110 transition-all">
+                <Link href={`/product/${item.slug}`} className="p-3.5 rounded-xl glass bg-white/5 text-white/40 group-hover:text-white group-hover:scale-110 transition-all">
                   <ArrowUpRight className="w-6 h-6" />
-                </button>
+                </Link>
               </div>
             </div>
-          ))}
+          )) : (
+            <div className="col-span-full py-20 text-center glass-card rounded-[3rem] border-dashed border-2 border-white/5">
+              <p className="text-white/20 font-black uppercase tracking-[0.3em]">No projects found</p>
+              <Link href="/dashboard/products/add">
+                <button className="mt-6 px-8 py-3 rounded-xl bg-brand-indigo text-white font-black text-sm">Upload Your First Project</button>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </div>
