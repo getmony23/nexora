@@ -9,7 +9,8 @@ import {
   LogOut,
   Bell,
   Search,
-  User as UserIcon
+  User as UserIcon,
+  MoreHorizontal
 } from "lucide-react";
 
 import { createSupabaseServerClient } from "@/lib/supabase-server";
