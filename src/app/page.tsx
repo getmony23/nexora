@@ -74,7 +74,7 @@ export default async function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {displayProducts.map((product) => (
-              <div key={product.id} className="group relative">
+              <Link key={product.id} href={`/product/${product.slug || product.id}`} className="group relative block">
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-indigo to-brand-purple rounded-[2.5rem] opacity-0 group-hover:opacity-20 blur-xl transition duration-500"></div>
                 <div className="relative glass-card rounded-[2.5rem] overflow-hidden border-white/5 flex flex-col h-full hover:border-white/20 transition-all duration-300">
                   <div className="aspect-[16/10] overflow-hidden relative">
@@ -117,7 +117,7 @@ export default async function Home() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </section>
