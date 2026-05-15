@@ -1,93 +1,108 @@
-import Navbar from "@/components/Navbar";
-import ProductCard from "@/components/products/ProductCard";
-import FilterSidebar from "@/components/products/FilterSidebar";
-import { Search, SlidersHorizontal } from "lucide-react";
+"use client";
 
-// Dummy Data
-const DUMMY_PRODUCTS = [
-  { id: "1", title: "Nexora SaaS Dashboard", price: 59, old_price: 99, category: "Dashboards", thumbnail_url: "", rating: 4.9, sales_count: 124, slug: "nexora-dashboard" },
-  { id: "2", title: "Modern Portfolio Template", price: 29, category: "Templates", thumbnail_url: "", rating: 4.8, sales_count: 86, slug: "modern-portfolio" },
-  { id: "3", title: "E-commerce Landing Page", price: 39, old_price: 49, category: "Landing Pages", thumbnail_url: "", rating: 4.7, sales_count: 215, slug: "ecommerce-landing" },
-  { id: "4", title: "Crypto Tracker App Script", price: 89, category: "Scripts", thumbnail_url: "", rating: 4.9, sales_count: 54, slug: "crypto-tracker" },
-  { id: "5", title: "Minimal UI Kit for Figma", price: 19, category: "UI Kits", thumbnail_url: "", rating: 4.5, sales_count: 320, slug: "minimal-ui-kit" },
-  { id: "6", title: "SEO Analyzer Tool", price: 45, old_price: 60, category: "Web Tools", thumbnail_url: "", rating: 4.6, sales_count: 110, slug: "seo-analyzer" },
-];
+import React, { useState } from "react";
+import { 
+  Search, 
+  Filter, 
+  ChevronDown, 
+  Star, 
+  Download,
+  ShoppingBag
+} from "lucide-react";
+
+const CATEGORIES = ["All", "Landing Page", "Dashboard", "App Template", "UI Kit", "Icon Set"];
 
 export default function BrowsePage() {
+  const [activeCategory, setActiveCategory] = useState("All");
+
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      <Navbar />
-
-      <main className="flex-grow pt-24 pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="mb-12">
-            <h1 className="text-4xl font-bold font-outfit mb-4">Browse Marketplace</h1>
-            <p className="text-white/40">Explore thousands of premium digital assets built for the future.</p>
+    <div className="min-h-screen pt-32 pb-20 px-6 max-w-7xl mx-auto space-y-12 animate-in fade-in duration-1000">
+      {/* Header & Search */}
+      <div className="text-center space-y-8">
+        <h1 className="text-5xl md:text-7xl font-black font-outfit text-white tracking-tight">
+          Discover the Future of <br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-indigo via-brand-purple to-brand-neon">Digital Assets</span>
+        </h1>
+        
+        <div className="max-w-2xl mx-auto relative group">
+          <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
+            <Search className="h-6 w-6 text-white/20 group-focus-within:text-brand-indigo transition-colors" />
           </div>
+          <input 
+            type="text" 
+            placeholder="Search for templates, dashboards, icons..."
+            className="w-full pl-16 pr-24 py-6 rounded-3xl bg-white/5 border border-white/10 focus:outline-none focus:border-brand-indigo transition-all text-white font-medium text-lg shadow-2xl"
+          />
+          <button className="absolute right-3 top-3 bottom-3 px-6 rounded-2xl bg-brand-indigo text-white font-black text-sm flex items-center gap-2 hover:opacity-90 transition-all">
+            <Filter className="w-4 h-4" />
+            Filters
+          </button>
+        </div>
+      </div>
 
-          <div className="flex flex-col md:flex-row gap-12">
-            {/* Sidebar */}
-            <FilterSidebar />
+      {/* Categories Bar */}
+      <div className="flex items-center justify-center gap-3 flex-wrap">
+        {CATEGORIES.map((cat) => (
+          <button 
+            key={cat}
+            onClick={() => setActiveCategory(cat)}
+            className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all border ${
+              activeCategory === cat 
+                ? 'bg-brand-indigo border-brand-indigo text-white shadow-lg shadow-brand-indigo/20' 
+                : 'bg-white/5 border-white/5 text-white/40 hover:text-white hover:bg-white/10'
+            }`}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
 
-            {/* Product Grid */}
-            <div className="flex-1">
-              {/* Search & Sort Bar */}
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <div className="relative flex-1">
-                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <Search className="h-4 w-4 text-white/20" />
-                  </div>
-                  <input
-                    type="text"
-                    className="block w-full pl-12 pr-4 py-3 border border-white/5 rounded-2xl bg-white/5 text-white placeholder-white/20 focus:outline-none focus:ring-1 focus:ring-brand-indigo transition-all"
-                    placeholder="Search for something specific..."
-                  />
-                </div>
-                <div className="flex gap-4">
-                  <select className="px-4 py-3 border border-white/5 rounded-2xl bg-white/5 text-white text-sm focus:outline-none focus:ring-1 focus:ring-brand-indigo outline-none cursor-pointer">
-                    <option>Newest First</option>
-                    <option>Price: Low to High</option>
-                    <option>Price: High to Low</option>
-                    <option>Top Rated</option>
-                    <option>Most Popular</option>
-                  </select>
-                  <button className="md:hidden p-3 border border-white/5 rounded-2xl bg-white/5 text-white">
-                    <SlidersHorizontal className="w-5 h-5" />
-                  </button>
+      {/* Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {[1, 2, 3, 4, 5, 6].map((i) => (
+          <div key={i} className="glass-card rounded-[2.5rem] overflow-hidden group hover:border-white/20 transition-all neon-border-indigo glass-hover">
+            <div className="aspect-video bg-white/5 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-t from-[#02040a] to-transparent opacity-60"></div>
+              {/* Mock Image */}
+              <div className="w-full h-full bg-gradient-to-br from-brand-indigo/10 to-brand-purple/10 flex items-center justify-center">
+                <ShoppingBag className="w-12 h-12 text-white/5 group-hover:scale-110 transition-transform duration-500" />
+              </div>
+              <div className="absolute top-4 right-4 px-3 py-1.5 rounded-xl glass bg-black/40 text-brand-neon text-xs font-black">
+                $49.00
+              </div>
+            </div>
+            
+            <div className="p-8 space-y-6">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-black text-brand-purple uppercase tracking-[0.3em]">Dashboard</span>
+                <div className="flex items-center gap-1">
+                  <Star className="w-3 h-3 text-yellow-500 fill-yellow-500" />
+                  <span className="text-xs font-bold text-white">4.9</span>
                 </div>
               </div>
-
-              {/* Grid */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-                {DUMMY_PRODUCTS.map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-              </div>
-
-              {/* Pagination Placeholder */}
-              <div className="mt-16 flex justify-center gap-2">
-                {[1, 2, 3, "...", 10].map((page, i) => (
-                  <button
-                    key={i}
-                    className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold transition-all ${
-                      page === 1 
-                        ? "bg-brand-indigo text-white shadow-lg shadow-brand-indigo/20" 
-                        : "glass hover:bg-white/10 text-white/60"
-                    }`}
-                  >
-                    {page}
-                  </button>
-                ))}
+              
+              <h3 className="text-xl font-black text-white group-hover:text-brand-indigo transition-colors">Quantum UI Dashboard Kit</h3>
+              
+              <div className="flex items-center justify-between pt-4 border-t border-white/5">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10"></div>
+                  <span className="text-xs font-bold text-white/40">by TechLeap</span>
+                </div>
+                <button className="p-3 rounded-xl glass bg-white/5 text-white/40 hover:text-brand-neon hover:bg-brand-neon/10 transition-all">
+                  <Download className="w-5 h-5" />
+                </button>
               </div>
             </div>
           </div>
-        </div>
-      </main>
+        ))}
+      </div>
 
-      <footer className="glass border-t border-white/5 py-8 text-center text-white/20 text-xs">
-        © 2026 Nexora Marketplace. All rights reserved.
-      </footer>
+      <div className="flex justify-center pt-10">
+        <button className="px-10 py-4 rounded-2xl glass bg-white/5 border border-white/10 text-white font-black hover:bg-white/10 transition-all flex items-center gap-2">
+          Load More Assets
+          <ChevronDown className="w-5 h-5" />
+        </button>
+      </div>
     </div>
   );
 }
